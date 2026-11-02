@@ -46,6 +46,16 @@ a.tile > .label{padding-right:44px;min-height:36px;box-sizing:border-box;line-he
 .portrait-symbols g *{fill:inherit;stroke:inherit;stroke-width:inherit;stroke-linecap:inherit;stroke-linejoin:inherit}
 .portrait-symbols.mobile{display:none}
 @media(max-width:600px){.portrait{min-height:400px!important}.portrait img{left:-14.35%;top:34px;width:129.06%}.portrait-symbols.desktop{display:none}.portrait-symbols.mobile{display:block}}
+</style><style>
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0 12px;max-width:780px;scroll-margin-top:32px}
+.contact-form label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700}
+.contact-form input,.contact-form textarea{width:100%;box-sizing:border-box;border:1px solid #aaa;border-radius:12px;padding:13px 15px;background:#faf9f6;color:#111;font:inherit;font-weight:400}
+.contact-form input:focus,.contact-form textarea:focus{outline:2px solid #2b4be0;outline-offset:2px}
+.contact-form .wide{grid-column:1/-1}.contact-form textarea{resize:vertical;min-height:130px}
+.contact-form button,.copy-email{cursor:pointer;font:inherit}.contact-form button{background:#f5c518;color:#111;border:0;width:fit-content}
+.contact-note{font-size:12px;line-height:1.5;color:#666;margin:0}.copy-email{background:transparent;border:1px solid #aaa;border-radius:999px;padding:8px 14px;color:#111;font-size:14px}
+.copy-email:focus-visible{outline:3px solid #2b4be0;outline-offset:3px}.copy-status{font-size:13px;color:#555}
+@media(max-width:600px){.contact-form{grid-template-columns:1fr}.contact-form .wide{grid-column:1}}
 </style></head>
 <body>
 <div class="page-wrap" style="max-width: 1200px; margin: 0 auto; padding: 32px 40px 64px; display: flex; flex-direction: column; gap: 32px">
@@ -65,8 +75,8 @@ a.tile > .label{padding-right:44px;min-height:36px;box-sizing:border-box;line-he
 <p style="margin: 0; font-size: 18px; line-height: 1.5; font-weight: 500; color: #5b5b5b">Computer science student building practical tools with AI assistance, from a stocking assistant coworkers used on shift to interactive learning paths.</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a class="btn" href="mailto:neillbeaton@gmail.com" style="background: #F5C518; color: #111111">Email me</a>
-<a class="btn" href="mailto:neillbeaton@gmail.com?subject=Resume%20request" style="border: 2px solid #111111; color: #111111">Request resume</a>
+<a class="btn" href="#contact-form" style="background: #F5C518; color: #111111">Email me</a>
+<a class="btn" href="assets/Beaton_Neill_Resume.pdf" download="Beaton_Neill_Resume.pdf" style="border: 2px solid #111111; color: #111111">Download resume</a>
 </div>
 </section>
 <figure class="tile portrait" style="grid-column: span 2; grid-row: span 1; margin: 0; padding: 20px; min-height: 340px; background: #2B4BE0; border-color: #2B4BE0; color: #ffffff"><svg class="portrait-symbols desktop" viewBox="0 0 550 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
@@ -150,13 +160,29 @@ a.tile > .label{padding-right:44px;min-height:36px;box-sizing:border-box;line-he
 </a><section class="tile" id="contact" style="grid-column: span 2; gap: 12px">
 <p class="label">Contact</p>
 <p style="margin: 0; font-size: 18px; line-height: 1.5; font-weight: 500">Let’s talk about practical tools, useful automation, and making unfamiliar tasks easier.</p>
+<form class="contact-form" id="contact-form" action="https://formsubmit.co/neillbeaton@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="New message from neillbeaton.com">
+<input type="hidden" name="_next" value="https://neillbeaton.com/thanks.html">
+<label>Your name<input type="text" name="name" autocomplete="name" required maxlength="120"></label>
+<label>Your email<input type="email" name="email" autocomplete="email" required maxlength="254"></label>
+<label class="wide">Message<textarea name="message" required maxlength="5000" placeholder="What would you like to talk about?"></textarea></label>
+<div class="wide"><button class="btn" type="submit">Send message ↗</button></div>
+<p class="contact-note wide">Sent through FormSubmit to my inbox. Prefer email? Use the address below.</p>
+</form>
 <div class="nav" style="display: flex; flex-wrap: wrap; gap: 24px; margin-top: auto">
 <a href="mailto:neillbeaton@gmail.com" style="font-weight: 800; color: #111111">neillbeaton@gmail.com</a>
+<button type="button" class="copy-email" id="copy-email">Copy email</button><span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
 <a href="https://github.com/neillb24">GitHub</a>
 </div>
 </section>
 </div>
 <p style="margin: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5b5b5b">Neill Beaton · 2026</p>
 </div>
-</body>
+<script>
+document.getElementById('copy-email').addEventListener('click', async function(){
+ const status=document.getElementById('copy-status');
+ try { await navigator.clipboard.writeText('neillbeaton@gmail.com'); status.textContent='Email copied!'; }
+ catch { status.textContent='Please copy this address: neillbeaton@gmail.com'; }
+});
+</script></body>
 </html>
